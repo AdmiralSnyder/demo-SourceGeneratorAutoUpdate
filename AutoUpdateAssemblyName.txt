@@ -1,0 +1,7 @@
+# this file contains the projects that should be auto-reloaded after the build of a generator.
+# there's 2 ways to have the projects referenced here:
+# 1: fully-qualified paths to the .csproj files - if other extensions are needed, please file an issue at:
+# https://github.com/AdmiralSnyder/Support-SourceGeneratorAutoUpdate/issues/new
+# 2: relative folders within the VS solution hierarchy (in case you have your projects inside of Solution folders)
+
+GeneratorClient

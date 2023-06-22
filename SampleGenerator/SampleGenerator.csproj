@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<!-- THE NEXT LINE IS NEEDED SO THE AUTO UPDATE CONSIDERS TRIGGERING -->
+	<!--AutoUpdateAssemblyName-->
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<IncludeBuildOutput>false</IncludeBuildOutput>
+		<LangVersion>preview</LangVersion>
+		<GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
+		<SignAssembly>True</SignAssembly>
+		<!-- THE ASSEMBLYNAME HAS A LAST PART THAT IS NUMERIC AND WILL BE INCREMENTED BY THE AUTO UPDATE. -->
+		<AssemblyName>SomeAssemblyName.1</AssemblyName>
+
+		<AssemblyOriginatorKeyFile>someFile.snk</AssemblyOriginatorKeyFile>
+	</PropertyGroup>
+	
+	<!-- The following libraries include the source generator interfaces and types we need -->
+	<ItemGroup>
+		<PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.4-beta1.22362.3" PrivateAssets="all" />
+		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.3.0" PrivateAssets="all" />
+	</ItemGroup>
+
+	<!-- This ensures the library will be packaged as a source generator when we use `dotnet pack` -->
+	<!--<ItemGroup>
+		<None Include="$(OutputPath)\$(AssemblyName).dll" Pack="true"
+			PackagePath="analyzers/dotnet/cs" Visible="false" />
+	</ItemGroup>-->
+
+</Project>
