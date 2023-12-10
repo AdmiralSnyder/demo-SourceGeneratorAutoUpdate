@@ -17,7 +17,7 @@ namespace IncrementalSourceGeneratorTest
                 
                 partial class Class1 
                 {
-                    void GeneratedMethod() => Console.WriteLine("Hello 11f");
+                    void GeneratedMethod() => Console.WriteLine("Hello 14fg");
                 }
                 """, Encoding.UTF8)));
         }

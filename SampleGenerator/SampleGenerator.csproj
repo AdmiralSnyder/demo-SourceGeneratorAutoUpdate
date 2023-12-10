@@ -2,21 +2,36 @@
 	<!-- THE NEXT LINE IS NEEDED SO THE AUTO UPDATE CONSIDERS TRIGGERING -->
 	<!--AutoUpdateAssemblyName-->
 	<PropertyGroup>
-		<TargetFramework>netstandard2.0</TargetFramework>
-		<IncludeBuildOutput>false</IncludeBuildOutput>
-		<LangVersion>preview</LangVersion>
-		<GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
-		<SignAssembly>True</SignAssembly>
-		<!-- THE ASSEMBLYNAME HAS A LAST PART THAT IS NUMERIC AND WILL BE INCREMENTED BY THE AUTO UPDATE. -->
-		<AssemblyName>SomeAssemblyName.1</AssemblyName>
-
-		<AssemblyOriginatorKeyFile>someFile.snk</AssemblyOriginatorKeyFile>
+		<AssemblyVersion>5.3.2.$(AutoIncrementedAssemblyRevision)</AssemblyVersion>
 	</PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+    <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
+
+		<LangVersion>preview</LangVersion>
+    
+    <!--Alternatively, I try to parse the AssemblyName and increment the last part, if it's int-parsable-->
+		<!-- THE ASSEMBLYNAME HAS A LAST PART THAT IS NUMERIC AND WILL BE INCREMENTED BY THE AUTO UPDATE. -->
+    <!--Alternatively, I try to parse the AssemblyVersion and increment the last part, if it's int-parsable-->
+		<AssemblyName>SomeAssemblyName.$(AssemblyVersion)</AssemblyName>
+    
+	</PropertyGroup>
+	<ItemGroup>
+	  <Compile Remove="AssemblyInfo.cs" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Remove="sgKey.snk" />
+	  <None Remove="someFile.snk" />
+	</ItemGroup>
 	
 	<!-- The following libraries include the source generator interfaces and types we need -->
 	<ItemGroup>
-		<PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.4-beta1.22362.3" PrivateAssets="all" />
-		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.3.0" PrivateAssets="all" />
+		<PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.4" PrivateAssets="all">
+      <IncludeAssets>
+        runtime; build; native; contentfiles; analyzers; buildtransitive
+      </IncludeAssets>
+    </PackageReference>
+		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.8.0" PrivateAssets="all" />
 	</ItemGroup>
 
 	<!-- This ensures the library will be packaged as a source generator when we use `dotnet pack` -->
